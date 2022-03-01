@@ -17,7 +17,7 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> with SingleTickerProviderStateMixin {
-  AnimationController animationController;
+  late AnimationController animationController;
   final TextEditingController phoneController = TextEditingController();
   final TextEditingController passController = TextEditingController();
   var maskFormatter = new MaskTextInputFormatter(mask: '+# (###) ###-##-##', filter: { "#": RegExp(r'[0-9]') });
@@ -69,7 +69,7 @@ class _LoginScreenState extends State<LoginScreen> with SingleTickerProviderStat
       ClientTCP.sendData({
         "LOGIN": sha256.convert(utf8.encode(phoneController.text)).toString(),
         "PWD": sha256.convert(utf8.encode(passController.text)).toString()
-      }, NetProtocol.CODE[NetProtocol.LOGIN])
+      }, (NetProtocol.CODE[NetProtocol.LOGIN] ?? -1))
     });
   }
 
@@ -265,7 +265,7 @@ class _LoginScreenState extends State<LoginScreen> with SingleTickerProviderStat
                                                     ),
                                                     SizedBox(width: 10,),
                                                     Text(
-                                                      AppLocalizations.of(context).translate(errorStatus),
+                                                      (AppLocalizations.of(context)?.translate(errorStatus) ?? ""),
                                                       style: TextStyle(
                                                         color: Colors.white.withAlpha(180),
                                                         fontWeight: FontWeight.w700,

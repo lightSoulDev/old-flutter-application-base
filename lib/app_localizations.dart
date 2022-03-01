@@ -5,17 +5,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 class AppLocalizations {
-  final Locale locale;
+  late final Locale locale;
 
   AppLocalizations(this.locale);
 
-  static AppLocalizations of (BuildContext context) {
+  static AppLocalizations? of (BuildContext context) {
     return Localizations.of<AppLocalizations>(context, AppLocalizations);
   }
 
   static const LocalizationsDelegate<AppLocalizations> delegate = _AppLocalizationsDelegate();
 
-  Map<String, String> _localizedStrings;
+  late Map<String, String> _localizedStrings;
 
   Future<bool> load() async {
     String jsonString = await rootBundle.loadString('lang/${locale.languageCode}.json');
@@ -31,16 +31,16 @@ class AppLocalizations {
   String translate(String text) {
     String result = text;
     print(text);
-    RegExp regExp = new RegExp(
+    RegExp regExp = RegExp(
       r"{l\|([^\s{]*)}",
       caseSensitive: false,
       multiLine: true,
     );
-    String replacement;
+    String? replacement;
     regExp.allMatches(text).forEach((match) => {
-      replacement = _localizedStrings[match.group(1)] != null ? _localizedStrings[match.group(1)]: match.group(1),
-      print("Match: " + match.group(0) + " => " + replacement),
-      result = result.replaceFirst(match.group(0), replacement)
+      replacement = _localizedStrings[match.group(1)] ?? match.group(1),
+      print("Match: " + (match.group(0) ?? "") + " => " + replacement!),
+      result = result.replaceFirst((match.group(0) ?? ""), replacement!)
     });
     return result;
   }

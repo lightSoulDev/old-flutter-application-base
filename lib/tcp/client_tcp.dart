@@ -4,22 +4,21 @@ import 'dart:io';
 import 'dart:convert';
 
 class ClientTCP {
-  static const HOST = '127.0.0.1';
+  static const HOST = '192.168.1.111';
   static const PORT = 9090;
   static Logger _log = Logger();
-  static Socket _socket;
-  static Function _callback;
-  static int lastTimeStamp;
+  static late Socket _socket;
+  static late Function _callback;
+  static late int lastTimeStamp;
 
   static void setCallback(Function callback) {
     _callback = callback;
   }
 
   static void open(callback) async {
-    if (_socket != null) onDone();
     print('Trying to connect');
     setCallback(callback);
-    Socket.connect(HOST, PORT, timeout: Duration(seconds: 30)).then((Socket socket) {
+    Socket.connect(HOST, PORT, timeout: Duration(seconds: 10)).then((Socket socket) {
       _socket = socket;
       _socket.listen(
         onData,

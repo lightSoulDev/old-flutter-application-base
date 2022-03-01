@@ -3,10 +3,10 @@ import 'package:device_info/device_info.dart';
 import 'package:flutter/services.dart';
 
 class DeviceInfo {
-  String name;
-  String version;
-  String id;
-  String platform;
+  late String name;
+  late String version;
+  late String id;
+  late String platform;
 }
 
 class AppInfo {

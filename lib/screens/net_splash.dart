@@ -34,7 +34,7 @@ class _NetworkSplashScreenState extends State<NetworkSplashScreen> {
         "PLATFORM": deviceInfo.platform,
         "DEVICE": "${deviceInfo.name} | ${deviceInfo.version} | ${deviceInfo.id}"
       };
-      ClientTCP.sendData(query, NetProtocol.CODE[NetProtocol.INIT]);
+      ClientTCP.sendData(query, (NetProtocol.CODE[NetProtocol.INIT] ?? -1));
     } else if (data == NetProtocol.CONNECTION_ERROR) {
       setState(() {
         state = "{l|NET_SPLASH_CONNECTING}";
@@ -106,7 +106,7 @@ class _NetworkSplashScreenState extends State<NetworkSplashScreen> {
                         height: 25,
                       ),
                       Text(
-                        AppLocalizations.of(context).translate(state),
+                        (AppLocalizations.of(context)?.translate(state) ?? ""),
                         style: TextStyle(
                           color: Colors.white,
                           fontSize: 18,

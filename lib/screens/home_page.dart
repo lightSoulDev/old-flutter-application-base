@@ -12,10 +12,10 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> with SingleTickerProviderStateMixin {
 
-  AnimationController animationController;
-  static double _mult = 1;
+  late AnimationController animationController;
+  static const double _mult = 1;
   static bool _canBeDragged = false;
-  static double _minDragStartEdge = 75;
+  static const double _minDragStartEdge = 75;
 
   @override
   void initState() {
@@ -44,7 +44,7 @@ class _MyHomePageState extends State<MyHomePage> with SingleTickerProviderStateM
 
   void _onDragUpdate(DragUpdateDetails details) {
     if (_canBeDragged) {
-      double delta = details.primaryDelta / (MediaQuery.of(context).size.width * _mult);
+      double delta = details.primaryDelta! / (MediaQuery.of(context).size.width * _mult);
       animationController.value += delta;
     }
   }
@@ -82,7 +82,7 @@ class _MyHomePageState extends State<MyHomePage> with SingleTickerProviderStateM
               Padding(
                 padding: EdgeInsets.only(top: 20, left: 20),
                 child: Text(
-                  AppLocalizations.of(context).translate("{l|SETTINGS}"),
+                  (AppLocalizations.of(context)?.translate("{l|SETTINGS}") ?? ""),
                   style: TextStyle(
                     color: Colors.white,
                     fontWeight: FontWeight.bold,
@@ -117,7 +117,7 @@ class _MyHomePageState extends State<MyHomePage> with SingleTickerProviderStateM
                         onPressed: toggle,
                       ),
                       Text(
-                        AppLocalizations.of(context).translate("{l|MENU}"),
+                        (AppLocalizations.of(context)?.translate("{l|MENU}") ?? ""),
                         style: TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 24
@@ -128,7 +128,7 @@ class _MyHomePageState extends State<MyHomePage> with SingleTickerProviderStateM
                           Icons.menu,
                           color: Colors.white,
                           size: 30,
-                        ),
+                        ), onPressed: () {  },
                       ),
                     ],
                   ),
