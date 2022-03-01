@@ -1,0 +1,9 @@
+{
+  "HELLO_WORLD": "Привет мир",
+  "NET_SPLASH_CONNECTING": "Подключаемся к нашим сервисам",
+  "TOMSK": "Томск",
+  "SETTINGS": "Настройки",
+  "MENU": "Меню",
+  "LOGIN_ERROR_PHONE": "Некорректный номер",
+  "LOGIN_ERROR_DATA": "Некорректный пароль"
+}
